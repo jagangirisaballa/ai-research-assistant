@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.env.local
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.DS_Store
+data/vectorstore/
+data/sample_docs/*
+!data/sample_docs/.gitkeep
+*.faiss
+*.pkl
