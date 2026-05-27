@@ -6,7 +6,7 @@ A portfolio project demonstrating production-grade patterns for senior AI archit
 ## Status
 
 - [x] Phase 1 — LangChain RAG pipeline (loader, chunker, FAISS, RetrievalQA, ConversationalChain, tool-calling agent)
-- [ ] Phase 2 — LangGraph multi-agent graph (router / retriever / web / responder nodes)
+- [x] Phase 2 — LangGraph multi-agent graph (router / retriever / web / responder nodes, conditional edges)
 - [ ] Phase 3 — FastAPI REST wrapper
 - [ ] Phase 4 — GitHub Actions CI
 
@@ -46,6 +46,9 @@ Every module names the pattern it implements in a top-of-file comment. Highlight
 | `src/retrieval/vectorstore.py` | Repository + Idempotent Build |
 | `src/retrieval/rag_chain.py` | RetrievalQA Chain, Conversational Retrieval Chain w/ Memory |
 | `src/agents/tool_agent.py` | Tool-Calling Agent, Retriever-as-Tool, External API Tool |
+| `src/graph/state.py` | TypedDict State Container + Reducer-merged messages |
+| `src/graph/nodes.py` | Router / Retriever / Web Search / Responder nodes, Defensive Parser |
+| `src/graph/builder.py` | StateGraph with Conditional Edges |
 
 ## Quick start
 
@@ -77,7 +80,7 @@ src/
   ingestion/   loader.py, chunker.py
   retrieval/   embeddings.py, vectorstore.py, rag_chain.py
   agents/      tool_agent.py
-  graph/       (Phase 2)
+  graph/       state.py, nodes.py, builder.py
   api/         (Phase 3)
 tests/
 data/sample_docs/   # drop your PDFs here (gitignored)
