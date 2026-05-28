@@ -7,7 +7,7 @@ A portfolio project demonstrating production-grade patterns for senior AI archit
 
 - [x] Phase 1 — LangChain RAG pipeline (loader, chunker, FAISS, RetrievalQA, ConversationalChain, tool-calling agent)
 - [x] Phase 2 — LangGraph multi-agent graph (router / retriever / web / responder nodes, conditional edges)
-- [ ] Phase 3 — FastAPI REST wrapper
+- [x] Phase 3 — FastAPI REST wrapper (`/health`, `/ingest`, `/query`)
 - [ ] Phase 4 — GitHub Actions CI
 
 ## Architecture (target end-state)
@@ -49,6 +49,9 @@ Every module names the pattern it implements in a top-of-file comment. Highlight
 | `src/graph/state.py` | TypedDict State Container + Reducer-merged messages |
 | `src/graph/nodes.py` | Router / Retriever / Web Search / Responder nodes, Defensive Parser |
 | `src/graph/builder.py` | StateGraph with Conditional Edges |
+| `src/api/main.py` | Application Factory, Structured Error Handler |
+| `src/api/dependencies.py` | Lazy Singleton + Dependency Injection |
+| `src/api/schemas.py` | Pydantic DTO |
 
 ## Quick start
 
@@ -81,7 +84,7 @@ src/
   retrieval/   embeddings.py, vectorstore.py, rag_chain.py
   agents/      tool_agent.py
   graph/       state.py, nodes.py, builder.py
-  api/         (Phase 3)
+  api/         main.py, dependencies.py, schemas.py
 tests/
 data/sample_docs/   # drop your PDFs here (gitignored)
 ```
@@ -89,3 +92,18 @@ data/sample_docs/   # drop your PDFs here (gitignored)
 ## Stack
 
 Python 3.11+ · LangChain 0.3 · LangGraph · FAISS · OpenAI · Tavily · FastAPI · pytest · ruff
+
+## Running the API
+
+```bash
+.venv/bin/uvicorn src.api.main:app --reload --port 8000
+# open http://localhost:8000/docs for Swagger UI
+```
+
+Endpoints:
+
+| Method | Path | Purpose |
+|---|---|---|
+| `GET` | `/health` | Liveness + vectorstore readiness |
+| `POST` | `/ingest` | (Re)build FAISS index from `data/sample_docs/` |
+| `POST` | `/query` | Run query through the LangGraph multi-agent graph |
