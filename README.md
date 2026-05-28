@@ -1,5 +1,8 @@
 # AI Research Assistant
 
+[![CI](https://github.com/jagangirisaballa/ai-research-assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/jagangirisaballa/ai-research-assistant/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue)](https://www.python.org/)
+
 RAG-powered multi-agent research assistant built with **LangChain** + **LangGraph**.
 A portfolio project demonstrating production-grade patterns for senior AI architect interviews.
 
@@ -8,7 +11,7 @@ A portfolio project demonstrating production-grade patterns for senior AI archit
 - [x] Phase 1 — LangChain RAG pipeline (loader, chunker, FAISS, RetrievalQA, ConversationalChain, tool-calling agent)
 - [x] Phase 2 — LangGraph multi-agent graph (router / retriever / web / responder nodes, conditional edges)
 - [x] Phase 3 — FastAPI REST wrapper (`/health`, `/ingest`, `/query`)
-- [ ] Phase 4 — GitHub Actions CI
+- [x] Phase 4 — GitHub Actions CI (ruff + pytest on Python 3.11 / 3.12)
 
 ## Architecture (target end-state)
 
